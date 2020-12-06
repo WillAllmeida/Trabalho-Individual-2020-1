@@ -1,0 +1,23 @@
+version: "3.0"
+services:
+  gces-api:
+    container_name: gces-api
+    build: ./api
+    volumes:
+      - ./:/app/gces-api
+    ports:
+      - "3000:3000"
+
+    command: bash -c "rm -f tmp/pids/server.pid && rails db:create && rails db:migrate &&  bundle exec rails s -p 3000 -b '0.0.0.0'"
+    depends_on:
+      - gces-db
+
+  gces-db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
