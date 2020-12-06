@@ -13,6 +13,7 @@ services:
       - gces-db
 
   gces-db:
+    container_name: gces-db
     image: postgres
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
@@ -21,3 +22,13 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+  
+  gces-frontend:
+    container_name: gces-frontend
+    build: ./client
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app/client
+      - /app/client/node_modules
+    command: yarn dev
