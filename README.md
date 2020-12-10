@@ -1,42 +1,23 @@
 # Trabalho Individual - GCES - 2020/1
 
-A Gestão de Configuração de Software é parte fundamental no curso de GCES, e dominar os conhecimentos de configuração de ambiente, containerização, virtualização, integração e deploy contínuo tem se tornado cada vez mais necessário para ingressar no mercado de trabalho.
-
-Para exercitar estes conhecimentos, você deverá aplicar os conceitos estudados ao longo da disciplina no produto de software contido neste repositório.
-
-O sistema se trata de uma aplicação Web, cuja funcionalidade consiste na pesquisa e exibição de perfis de usuários do GitHub, que é composta de:
-
-- Front End escrito em Javascript, utilizando os frameworks Vue.JS e Quasar;
-- Back End escrito em Ruby on Rails, utilizado em modo API;
-- Banco de Dados PostgreSQL;
-
-Para executar a aplicação na sua máquina, basta seguir o passo-a-passo descrito no arquivo [Descrição e Instruções](Descricao-e-Instrucoes.md).
-
 ## Critérios de avaliação
 
 ### 1. Containerização
 
-A aplicação deverá ter seu ambiente completamente containerizado. Desta forma, cada subsistema (Front End, Back End e Banco de Dados) deverá ser isolado em um container individual.
+A aplicação foi containerizada utilizando Docker e Docker Compose, contendo um arquivo principal docker-compose.yml contendo as instruções dos serviços e dois arquivos Dockerfile (Na pasta client e na api), para instruções específicas de instalação de pacotes.
 
-Deverá ser utilizado um orquestrador para gerenciar comunicação entre os containers, o uso de credenciais, networks, volumes, entre outras configurações necessárias para a correta execução da aplicação.
+O comando para subir o ambiente é:
 
-Para realizar esta parte do trabalho, recomenda-se a utilização das ferramentas:
+    $ docker-compose up --build
 
-- Docker versão 17.04.0+
-- Docker Compose com sintaxe na versão 3.2+
 
 ### 2. Integração contínua
 
-Você deverá criar um 'Fork' deste repositório, onde será desenvolvida sua solução. Nele, cada commit submetido deverá passar por um sistema de integração contínua, realizando os seguintes estágios:
+A ferramenta principal escolhida para a integração contínua foi o TravisCI, contendo o script para build tanto da API quanto do Client e de seus respectivos testes.
 
-- Build: Construção completa do ambiente;
-- Testes: Os testes automatizados da aplicação devem ser executados;
-- Coleta de métricas: Deverá ser realizada a integração com algum serviço externo de coleta de métricas de qualidade;
+A coleta de métricas de qualidade foi feita utilizando o CodeClimate, e o mesmo tornou-se um dos critérios para alguma branch ser mergada na master.
 
-O sistema de integração contínua deve exibir as informações de cada pipeline, e impedir que trechos de código que não passem corretamente por todo o processo sejam adicionados à 'branch default' do repositório.
+Badge com o nível de manutenibilidade mensurado pela ferramenta
+[![Maintainability](https://api.codeclimate.com/v1/badges/87d3e9ee6d535eb5d8bf/maintainability)](https://codeclimate.com/github/WillAllmeida/Trabalho-Individual-2020-1/maintainability)
 
-Para esta parte do trabalho, poderá ser utilizada qualquer tecnologia ou ferramenta que o aluno desejar, como GitlabCI, TravisCI, CircleCI, Jenkins, CodeClimate, entre outras.
-
-### 3. Deploy contínuo (Extra)
-
-Caso cumpra todos os requisitos descritos acima, será atribuída uma pontuação extra para o aluno que configure sua pipeline de modo a publicar a aplicação automaticamente, sempre que um novo trecho de código seja integrado à branch default.
+De acordo com a submissão de pull requests, são verificadas as condições de passar na pipeline de build/testes do TravisCI e se o código não possui novos bad smells de acordo com o CodeClimate.
