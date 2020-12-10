@@ -20,4 +20,8 @@ A coleta de métricas de qualidade foi feita utilizando o CodeClimate, e o mesmo
 Badge com o nível de manutenibilidade mensurado pela ferramenta
 [![Maintainability](https://api.codeclimate.com/v1/badges/87d3e9ee6d535eb5d8bf/maintainability)](https://codeclimate.com/github/WillAllmeida/Trabalho-Individual-2020-1/maintainability)
 
+Badge com o Status da build
+[![Build Status](https://travis-ci.org/WillAllmeida/Trabalho-Individual-2020-1.svg?branch=master)](https://travis-ci.org/WillAllmeida/Trabalho-Individual-2020-1)
+
+
 De acordo com a submissão de pull requests, são verificadas as condições de passar na pipeline de build/testes do TravisCI e se o código não possui novos bad smells de acordo com o CodeClimate.
