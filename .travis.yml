@@ -1,0 +1,16 @@
+language: minimal
+
+sudo: required
+
+services:
+- docker
+
+install:
+  - docker-compose up --build -d
+
+script:
+  - docker-compose run gces-api bundle exec rails test
+  - docker-compose run gces-frontend yarn run test:unit
+
+after-script:
+  - docker-compose down --remove-orphans
